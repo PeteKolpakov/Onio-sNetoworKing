@@ -1,25 +1,16 @@
-﻿using System;
+﻿using OniosNetworKing.Assets.Code;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Code
 {
-    class Door : MonoBehaviour
+    class Door : SwitchPart
     {
         public void Open()
         {
-            StartCoroutine(SlideOpen());
+            StartCoroutine(DUtils.SlideDown(gameObject));
         }
-
-        private IEnumerator SlideOpen()
-        {            
-            while (transform.position.y > -1)
-            {
-                transform.position += new Vector3(0, -0.1f, 0);
-                yield return null;                
-            }
-        }
-
     }
 }
