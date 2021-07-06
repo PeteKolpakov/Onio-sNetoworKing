@@ -9,23 +9,14 @@ namespace Assets.Code
 {
     class DoorSwitch : SwitchPart
     {
-        private List<Door> _targetDoors;
+        [SerializeField] private List<Door> _targetDoors;
         private Vector3 _initialPosition;
-        [SerializeField][EnableIf("_myColor", SwitchColor.Green)]
+        [SerializeField][EnableIf("_myColor", SwitchType.Timed)]
         private float _resetTime = 3f;
 
         private void Awake()
         {
-            _targetDoors = new List<Door>();
             _initialPosition = transform.position;
-            Door[] tempList = FindObjectsOfType<Door>();
-            foreach (var door in tempList)
-            {
-                if (door.GetPartColor() == _myColor)
-                {
-                    _targetDoors.Add(door);
-                }
-            }
             if (_targetDoors.Count == 0)
             {
                 Debug.LogWarning($"Warning: Switch {gameObject} has no Target Doors");
@@ -37,7 +28,7 @@ namespace Assets.Code
             StartCoroutine(DUtils.SlideDown(gameObject));
             switch (_myColor)
             {
-                case SwitchColor.Green:
+                case SwitchType.Timed:
                     StartCoroutine(CloseDoorsWithDelay());
                     break;
                 default:
@@ -50,7 +41,7 @@ namespace Assets.Code
             StartCoroutine(DUtils.SlideUpTo(gameObject, _initialPosition));
             switch (_myColor)
             {
-                case SwitchColor.Blue:
+                case SwitchType.Momentary:
                     CloseDoors();
                     break;
                 default:
