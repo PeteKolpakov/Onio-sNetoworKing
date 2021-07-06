@@ -8,7 +8,7 @@ namespace OniosNetworKing.Assets.Code
     public static class DUtils 
     {
         private const float SLIDE_SPEED = 0.2f;
-        private const float GROUND_OFFSET = 0.1f;
+        private const float GROUND_OFFSET = .3f;
 
         /// <summary>
         /// Causes target gameobject to slide down untill it is 1/2 of its y scale below ground 
@@ -24,8 +24,9 @@ namespace OniosNetworKing.Assets.Code
                 yield return null;
             }
         }
-        public static IEnumerator SlideUpTo(GameObject target, Vector3 targetTransform)
+        public static IEnumerator SlideUpTo(GameObject target, Vector3 targetTransform, float delay)
         {
+            yield return new WaitForSeconds(delay);
             while (target.transform.position.y < targetTransform.y)
             {
                 target.transform.position += new Vector3(0, SLIDE_SPEED, 0);

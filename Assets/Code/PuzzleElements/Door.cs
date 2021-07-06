@@ -19,7 +19,7 @@ namespace Assets.Code
         }
         public void Close()
         {
-            StartCoroutine(DUtils.SlideUpTo(gameObject, _initialPosition));
+            StartCoroutine(DUtils.SlideUpTo(gameObject, _initialPosition, .2f));
         }
     }
 }

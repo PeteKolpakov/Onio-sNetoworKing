@@ -11,11 +11,17 @@ namespace Assets.Code
     {
         [SerializeField] private List<Door> _targetDoors;
         private Vector3 _initialPosition;
-        [SerializeField][EnableIf("_myColor", SwitchType.Timed)]
+        [SerializeField] [EnableIf("_myType", SwitchType.Timed)]
         private float _resetTime = 3f;
+        [SerializeField]
+        protected SwitchType _myType;
+
+        private bool _isDepressed = false;
+        private List<Collider> _thingsStandingOnMe;
 
         private void Awake()
         {
+            _thingsStandingOnMe = new List<Collider>();
             _initialPosition = transform.position;
             if (_targetDoors.Count == 0)
             {
@@ -23,13 +29,31 @@ namespace Assets.Code
             }
         }
 
+
+        private void CheckIfShouldStayDepressed()
+        {
+            if (!_isDepressed)
+                return;
+
+            if (_thingsStandingOnMe.Count > 0)
+            {
+                _isDepressed = false;
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
+            _isDepressed = true;
+
             StartCoroutine(DUtils.SlideDown(gameObject));
-            switch (_myColor)
+            if (!_thingsStandingOnMe.Contains(other))
+            {
+                _thingsStandingOnMe.Add(other);
+            }
+            switch (_myType)
             {
                 case SwitchType.Timed:
-                    StartCoroutine(CloseDoorsWithDelay());
+                    StartCoroutine(TimedSwitchAction());
                     break;
                 default:
                     OpenDoors();
@@ -38,37 +62,47 @@ namespace Assets.Code
         }
         private void OnTriggerExit(Collider other)
         {
-            StartCoroutine(DUtils.SlideUpTo(gameObject, _initialPosition));
-            switch (_myColor)
+            if (_thingsStandingOnMe.Contains(other))
+            {
+                _thingsStandingOnMe.Remove(other);
+                CheckIfShouldStayDepressed();
+            }            
+            switch (_myType)
             {
                 case SwitchType.Momentary:
+                    StartCoroutine(DUtils.SlideUpTo(gameObject, _initialPosition, .3f));
                     CloseDoors();
-                    break;
-                default:
                     break;
             }
         }
 
         private void OpenDoors()
         {
-            foreach (Door door in _targetDoors)
+            if (_isDepressed)
             {
-                door.Open();
+                foreach (Door door in _targetDoors)
+                {
+                    door.Open();
+                }
             }
         }
 
         private void CloseDoors()
         {
-            foreach (Door door in _targetDoors)
+            if (!_isDepressed)
             {
-                door.Close();
+                foreach (Door door in _targetDoors)
+                {
+                    door.Close();
+                }
             }
         }
 
-        private IEnumerator CloseDoorsWithDelay()
+        private IEnumerator TimedSwitchAction()
         {
             OpenDoors();
             yield return new WaitForSeconds(_resetTime);
+            StartCoroutine(DUtils.SlideUpTo(gameObject, _initialPosition, .3f));
             CloseDoors();
         }
     }
