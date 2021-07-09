@@ -3,12 +3,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace Assets.Code
 {
     [RequireComponent(typeof(Player))]
     [RequireComponent(typeof(Rigidbody))]
-    class PlayerMovement : MonoBehaviour
+    class PlayerMovement : MonoBehaviour, IPunObservable
     {        
         [SerializeField]private float _speed = 5;
         private Vector3 _direction;
@@ -45,6 +46,24 @@ namespace Assets.Code
             _rb.MovePosition(transform.position += _direction * _speed * Time.fixedDeltaTime);
             
         }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // Sending our input through here
+
+            // stream.SendNext(horizontal);
+            // stream.SendNext(vertical);
+        }
+        else
+        {
+            // Receiving inputs from other players
+
+            // horizontal = (float)stream.ReceiveNext();
+            // vertical = (float)stream.ReceiveNext();
+        }
+    }
 
     }
 }

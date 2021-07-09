@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: e920cb0c8ce3d684dacd3c5ff55b3efb
   - enabled: 1
-    path: Assets/Scenes/MS(witch)Paint.unity
-    guid: f4992d237f0d24543915c20ef8362e82
+    path: Assets/Scenes/TestLevel2.unity
+    guid: 739219d878ff930428c36ad942a27600
   - enabled: 1
     path: Assets/Scenes/WinScreen.unity
     guid: f6a967a1506da2e46aa16f0b8f3d7c0c
