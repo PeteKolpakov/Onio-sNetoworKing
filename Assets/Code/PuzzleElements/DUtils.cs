@@ -7,8 +7,8 @@ namespace OniosNetworKing.Assets.Code
 {
     public static class DUtils 
     {
-        private const float SLIDE_SPEED = 0.2f;
-        private const float GROUND_OFFSET = .3f;
+        private const float SLIDE_SPEED = 0.1f;
+        private const float GROUND_OFFSET = .2f;
 
         /// <summary>
         /// Causes target gameobject to slide down untill it is 1/2 of its y scale below ground 

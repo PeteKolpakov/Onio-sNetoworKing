@@ -31,17 +31,23 @@ namespace Assets.Code
 
         private void Update()
         {
-            Debug.Log(_thingsStandingOnMe.Count);
+            CheckPressedStatus();
+            Debug.Log($"is pressed is {_isPressed}, there are {_thingsStandingOnMe.Count} things on the switch");
         }
-        private void CheckIfShouldStayPressed()
+        private bool CheckPressedStatus()
         {
             if (!_isPressed)
-                return;
+                return false;
 
             if (_thingsStandingOnMe.Count > 0)
             {
+                _isPressed = true;
+            }
+            else if(_thingsStandingOnMe.Count <= 0)
+            {
                 _isPressed = false;
             }
+            return _isPressed;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -68,7 +74,7 @@ namespace Assets.Code
             if (_thingsStandingOnMe.Contains(other))
             {
                 _thingsStandingOnMe.Remove(other);
-                CheckIfShouldStayPressed();
+                CheckPressedStatus();
             }
             if (_isPressed)
             {
@@ -108,10 +114,7 @@ namespace Assets.Code
         private IEnumerator TimedSwitchAction()
         {
             OpenDoors();
-            while (_isPressed)
-            {
-                yield return null;
-            }
+            yield return new WaitUntil(() => _isPressed == false);
             yield return new WaitForSeconds(_resetTime);
             StartCoroutine(DUtils.SlideUpTo(gameObject, _initialPosition, .3f));
             CloseDoors();
