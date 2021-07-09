@@ -16,7 +16,7 @@ namespace Assets.Code
         [SerializeField]
         protected SwitchType _myType;
 
-        private bool _isDepressed = false;
+        private bool _isPressed = false;
         private List<Collider> _thingsStandingOnMe;
 
         private void Awake()
@@ -29,21 +29,24 @@ namespace Assets.Code
             }
         }
 
-
-        private void CheckIfShouldStayDepressed()
+        private void Update()
         {
-            if (!_isDepressed)
+            Debug.Log(_thingsStandingOnMe.Count);
+        }
+        private void CheckIfShouldStayPressed()
+        {
+            if (!_isPressed)
                 return;
 
             if (_thingsStandingOnMe.Count > 0)
             {
-                _isDepressed = false;
+                _isPressed = false;
             }
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            _isDepressed = true;
+            _isPressed = true;
 
             StartCoroutine(DUtils.SlideDown(gameObject));
             if (!_thingsStandingOnMe.Contains(other))
@@ -65,8 +68,12 @@ namespace Assets.Code
             if (_thingsStandingOnMe.Contains(other))
             {
                 _thingsStandingOnMe.Remove(other);
-                CheckIfShouldStayDepressed();
-            }            
+                CheckIfShouldStayPressed();
+            }
+            if (_isPressed)
+            {
+                return;
+            }
             switch (_myType)
             {
                 case SwitchType.Momentary:
@@ -78,7 +85,7 @@ namespace Assets.Code
 
         private void OpenDoors()
         {
-            if (_isDepressed)
+            if (_isPressed)
             {
                 foreach (Door door in _targetDoors)
                 {
@@ -89,7 +96,7 @@ namespace Assets.Code
 
         private void CloseDoors()
         {
-            if (!_isDepressed)
+            if (!_isPressed)
             {
                 foreach (Door door in _targetDoors)
                 {
@@ -101,6 +108,10 @@ namespace Assets.Code
         private IEnumerator TimedSwitchAction()
         {
             OpenDoors();
+            while (_isPressed)
+            {
+                yield return null;
+            }
             yield return new WaitForSeconds(_resetTime);
             StartCoroutine(DUtils.SlideUpTo(gameObject, _initialPosition, .3f));
             CloseDoors();
