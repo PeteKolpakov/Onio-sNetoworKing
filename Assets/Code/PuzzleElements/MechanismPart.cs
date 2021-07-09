@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace OniosNetworKing.Assets.Code
 {
-    public enum SwitchPartType 
+    public enum MechanismPart 
     {      
         Door = 0,
         Switch

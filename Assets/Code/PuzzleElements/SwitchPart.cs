@@ -8,17 +8,11 @@ namespace OniosNetworKing.Assets.Code
     class SwitchPart : MonoBehaviour
     {
         [SerializeField]
-        protected SwitchPartType _mySwitchPart;
-        [SerializeField]
-        protected SwitchColor _myColor;
+        protected MechanismPart _mySwitchPart;
 
-        public SwitchPartType GetPartType()
+        public MechanismPart GetPartType()
         {
             return _mySwitchPart;
-        }
-        public SwitchColor GetPartColor()
-        {
-            return _myColor;
         }
     }
 }
