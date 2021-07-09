@@ -849,11 +849,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58b6f66b978c3346a70ff8976315a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _username: MrBones98
   _maxMessageCount: 25
   _messageList: []
   _chatPannel: {fileID: 530242453}
   _textObject: {fileID: 5877404458883430980, guid: f0e505efe0809a24694ec00285528103, type: 3}
   _chatBox: {fileID: 277773666}
+  _playerMessage: {r: 1, g: 1, b: 1, a: 1}
+  _info: {r: 1, g: 0.8520418, b: 0, a: 1}
 --- !u!4 &691766479
 Transform:
   m_ObjectHideFlags: 0
