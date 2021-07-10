@@ -108,6 +108,7 @@ namespace OniosNetworKing
                     {
                         if (GUILayout.Button("Play!"))
                         {
+                            print("TRYING TO START A GAME");
                             connectionModel.StartGame();
                         }
                     }

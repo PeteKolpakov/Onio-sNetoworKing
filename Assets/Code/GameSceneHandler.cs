@@ -8,6 +8,8 @@ namespace OniosNetworKing
     public class GameSceneHandler : MonoBehaviourPunCallbacks
     {
         [SerializeField] string playerPrefabName;
+        public Transform FirstPlayerPosition;
+        public Transform SecondPlayerPosition;
 
         private void Start()
         {
@@ -25,7 +27,11 @@ namespace OniosNetworKing
         {
             if (PhotonNetwork.IsConnected)
             {
-                PhotonNetwork.Instantiate(playerPrefabName, Vector3.zero, Quaternion.identity);
+                if(PhotonNetwork.LocalPlayer.IsMasterClient){
+                    PhotonNetwork.Instantiate(playerPrefabName, FirstPlayerPosition.position, Quaternion.identity);
+                }else{
+                    PhotonNetwork.Instantiate(playerPrefabName, SecondPlayerPosition.position, Quaternion.identity);
+                }
             }
             else
             {

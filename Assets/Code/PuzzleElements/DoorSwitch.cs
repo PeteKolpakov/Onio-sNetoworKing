@@ -25,14 +25,14 @@ namespace Assets.Code
             _initialPosition = transform.position;
             if (_targetDoors.Count == 0)
             {
-                Debug.LogWarning($"Warning: Switch {gameObject} has no Target Doors");
+                //Debug.LogWarning($"Warning: Switch {gameObject} has no Target Doors");
             }
         }
 
         private void Update()
         {
             CheckPressedStatus();
-            Debug.Log($"is pressed is {_isPressed}, there are {_thingsStandingOnMe.Count} things on the switch");
+            //Debug.Log($"is pressed is {_isPressed}, there are {_thingsStandingOnMe.Count} things on the switch");
         }
         private bool CheckPressedStatus()
         {

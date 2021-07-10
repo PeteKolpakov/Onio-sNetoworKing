@@ -77,7 +77,7 @@ namespace OniosNetworKing
         {
             if(PhotonNetwork.IsConnectedAndReady && PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.LoadLevel(1);
+                PhotonNetwork.LoadLevel(2);
             }
         }
     }
