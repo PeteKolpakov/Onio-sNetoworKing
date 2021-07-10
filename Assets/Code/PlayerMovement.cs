@@ -4,12 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 namespace Assets.Code
 {
     [RequireComponent(typeof(Player))]
     [RequireComponent(typeof(Rigidbody))]
-    class PlayerMovement : MonoBehaviour, IPunObservable
+    class PlayerMovement : MonoBehaviourPun, IPunObservable
     {        
         [SerializeField]private float _speed = 5;
         private Vector3 _direction;
@@ -17,6 +18,8 @@ namespace Assets.Code
         private Player _player;
         private string _xAxisInput;
         private string _yAxisInput;
+
+        [SerializeField] TMP_Text Nickname;
 
         private void Awake()
         {
@@ -34,17 +37,19 @@ namespace Assets.Code
         }
         private void Start()
         {
+            Nickname.text = photonView.Owner.NickName;
             _rb = GetComponent<Rigidbody>();
         }
 
         private void Update()
         {
-            _direction = new Vector3(Input.GetAxisRaw(_xAxisInput), 0, Input.GetAxisRaw(_yAxisInput)).normalized;
+            if(photonView.IsMine){
+                _direction = new Vector3(Input.GetAxisRaw(_xAxisInput), 0, Input.GetAxisRaw(_yAxisInput)).normalized;
+            }
         }
         private void FixedUpdate()
         {
             _rb.MovePosition(transform.position += _direction * _speed * Time.fixedDeltaTime);
-            
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -53,15 +58,13 @@ namespace Assets.Code
         {
             // Sending our input through here
 
-            // stream.SendNext(horizontal);
-            // stream.SendNext(vertical);
+            stream.SendNext(_direction);
         }
         else
         {
             // Receiving inputs from other players
 
-            // horizontal = (float)stream.ReceiveNext();
-            // vertical = (float)stream.ReceiveNext();
+            _direction = (Vector3)stream.ReceiveNext();
         }
     }
 
