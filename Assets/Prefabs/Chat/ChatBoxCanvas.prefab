@@ -373,7 +373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
+  m_SynchronizeScale: 0
   m_UseLocal: 1
 --- !u!1 &5877586395739154963
 GameObject:
@@ -589,7 +589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -279.18, y: -162.4}
+  m_AnchoredPosition: {x: -279.18, y: -175.1}
   m_SizeDelta: {x: 242.04, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5877586395874167179

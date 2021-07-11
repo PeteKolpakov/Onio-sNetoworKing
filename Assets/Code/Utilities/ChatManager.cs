@@ -17,7 +17,9 @@ namespace OniosNetworKing
         [SerializeField] private Color _playerMessage, _info;
         private void Start()
         {
-            _nickName = PhotonNetwork.LocalPlayer.NickName;
+            _nickName = PhotonNetwork.LocalPlayer.NickName; 
+            SendMessageToChat("This is a beautiful DebugLine", Message.MessageType.Info);
+
         }
         void Update()
         {
