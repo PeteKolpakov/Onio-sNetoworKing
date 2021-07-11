@@ -628,6 +628,7 @@ GameObject:
   - component: {fileID: 530242454}
   - component: {fileID: 530242456}
   - component: {fileID: 530242455}
+  - component: {fileID: 530242457}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -694,6 +695,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &530242457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530242453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
 --- !u!1 &667626347
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,8 +847,9 @@ GameObject:
   m_Component:
   - component: {fileID: 691766479}
   - component: {fileID: 691766478}
+  - component: {fileID: 691766480}
   m_Layer: 0
-  m_Name: Let's See
+  m_Name: Chat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -849,7 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58b6f66b978c3346a70ff8976315a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _username: MrBones98
+  _nickName: 
   _maxMessageCount: 25
   _messageList: []
   _chatPannel: {fileID: 530242453}
@@ -871,6 +889,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &691766480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691766477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 691766478}
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &816588128
 GameObject:
   m_ObjectHideFlags: 0

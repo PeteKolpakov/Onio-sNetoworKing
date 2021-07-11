@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,21 +7,25 @@ using UnityEngine.UI;
 
 namespace OniosNetworKing
 {
-    public class ChatManager : MonoBehaviour
+    public class ChatManager : MonoBehaviour, IPunObservable
     {
-        [SerializeField] private string _username;
+        [SerializeField] private string _nickName;
         [SerializeField][Range(0,25)] private int _maxMessageCount = 25;
         [SerializeField] private List<Message> _messageList = new List<Message>();
         [SerializeField] private GameObject _chatPannel, _textObject;
         [SerializeField] private TMP_InputField _chatBox;
         [SerializeField] private Color _playerMessage, _info;
+        private void Start()
+        {
+            _nickName = PhotonNetwork.LocalPlayer.NickName;
+        }
         void Update()
         {
             if(_chatBox.text != "")
             {
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    SendMessageToChat(_username+": "+_chatBox.text,Message.MessageType.PlayerMesage);
+                    SendMessageToChat(_nickName+": "+_chatBox.text,Message.MessageType.PlayerMesage);
                     _chatBox.text = "";
                 }
             }
@@ -35,6 +40,11 @@ namespace OniosNetworKing
                     SendMessageToChat("You pressed the space key!", Message.MessageType.Info);
                 }
             }
+        }
+        [PunRPC]
+        private void RPC_SendMessageToChat()
+        {
+
         }
         public void SendMessageToChat(string message, Message.MessageType messageType)
         {
@@ -71,6 +81,11 @@ namespace OniosNetworKing
                     break;
             }
             return color;
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            throw new System.NotImplementedException();
         }
     }
     [System.Serializable]
