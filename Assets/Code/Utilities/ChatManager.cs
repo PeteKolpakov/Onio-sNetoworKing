@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace OniosNetworKing
 {
-    public class ChatManager : MonoBehaviour, IPunObservable
+    public class ChatManager : MonoBehaviourPun, IPunObservable
     {
         [SerializeField] private string _nickName;
         [SerializeField][Range(0,25)] private int _maxMessageCount = 25;
@@ -29,7 +29,8 @@ namespace OniosNetworKing
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     //RPC change
-                    SendMessageToChat(_nickName+": "+_chatBox.text,Message.MessageType.PlayerMesage);
+                    photonView.RPC("RPC_SendMessageToChat", RpcTarget.All,false, $"{_nickName}:" + _chatBox.text,Message.MessageType.PlayerMesage);
+                    //SendMessageToChat(_nickName+": "+_chatBox.text,Message.MessageType.PlayerMesage);
                     _chatBox.text = "";
                 }
             }
@@ -41,18 +42,14 @@ namespace OniosNetworKing
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    //RPC change
                     SendMessageToChat("You pressed the space key!", Message.MessageType.Info);
                 }
             }
         }
         [PunRPC]
-        private void RPC_SendMessageToChat()
+        private void RPC_SendMessageToChat(string message, Message.MessageType messageType)
         {
 
-        }
-        public void SendMessageToChat(string message, Message.MessageType messageType)
-        {
             if (_messageList.Count >= _maxMessageCount)
             {
                 Destroy(_messageList[0].TextObject.gameObject);
@@ -70,6 +67,9 @@ namespace OniosNetworKing
             newMessage.TextObject.color = MessageTypeColor(messageType);
 
             _messageList.Add(newMessage);
+        }
+        public void SendMessageToChat(string message, Message.MessageType messageType)
+        {
         }
         private Color MessageTypeColor(Message.MessageType messageType)
         {
