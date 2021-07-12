@@ -23,10 +23,12 @@ namespace OniosNetworKing
         }
         void Update()
         {
+            //if(photonView.IsMine){}
             if(_chatBox.text != "")
             {
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
+                    //RPC change
                     SendMessageToChat(_nickName+": "+_chatBox.text,Message.MessageType.PlayerMesage);
                     _chatBox.text = "";
                 }
@@ -39,6 +41,7 @@ namespace OniosNetworKing
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    //RPC change
                     SendMessageToChat("You pressed the space key!", Message.MessageType.Info);
                 }
             }

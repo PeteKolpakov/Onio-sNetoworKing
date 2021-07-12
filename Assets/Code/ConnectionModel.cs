@@ -77,6 +77,7 @@ namespace OniosNetworKing
         {
             if(PhotonNetwork.IsConnectedAndReady && PhotonNetwork.IsMasterClient)
             {
+                //What happens to the Player who did not creat the lobby?
                 PhotonNetwork.LoadLevel(2);
             }
         }
