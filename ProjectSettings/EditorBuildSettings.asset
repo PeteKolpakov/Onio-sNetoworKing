@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/NetworkingConnection.unity
     guid: f4b0cd3c856bc4349a20f867b138e112
   - enabled: 1
-    path: Assets/Scenes/TestLevel2.unity
-    guid: 739219d878ff930428c36ad942a27600
+    path: Assets/Scenes/TestLevel1.unity
+    guid: a6e546105b6932b4096166c2f0519ae8
   - enabled: 1
     path: Assets/Scenes/WinScreen.unity
     guid: f6a967a1506da2e46aa16f0b8f3d7c0c
