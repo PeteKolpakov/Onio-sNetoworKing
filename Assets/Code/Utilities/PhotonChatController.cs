@@ -6,9 +6,10 @@ using ExitGames.Client.Photon;
 
 namespace OniosNetworKing
 {
-    public class PhotonChatController : MonoBehaviour, IChatClientListener
+    public class PhotonChatController : MonoBehaviourPun, IChatClientListener
     {
         [SerializeField] private string _nickName;
+        [SerializeField] private string _useerID;
         private ChatClient _chatClient;
         private void Awake()
         {
@@ -24,13 +25,12 @@ namespace OniosNetworKing
         {
             Debug.Log("Connecting to Photon Chat");
             _chatClient.AuthValues = new Photon.Chat.AuthenticationValues(_nickName);
-            //ChatAppSettings chatSettings = PhotonNetwork.PhotonServerSettings.AppSettings.ChatSettings();
-            //_chatClient.ConnectUsingSettings(chatSettings);
+            //ChatAppSettings chatAppSettings = PhotonNetwork.PhotonServerSettings.AppSettings.GetChatSettings();
         }
 
         private void Update()
         {
-        
+            _chatClient.Service();
         }
 
         public void DebugReturn(DebugLevel level, string message)
