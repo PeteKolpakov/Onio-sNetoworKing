@@ -1237,6 +1237,45 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f08b8e79fbf8cd4cb8dc2f60175f8ad, type: 3}
+--- !u!1 &941335820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7405072704008309563, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
+  m_PrefabInstance: {fileID: 1037605630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &941335821 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7405072704008309560, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
+  m_PrefabInstance: {fileID: 1037605630}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941335820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58b6f66b978c3346a70ff8976315a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &941335823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941335820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 941335821}
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &1003967056 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2064680097232524258, guid: 4bb32634eae08a442adcd623eee2f87d, type: 3}
@@ -1497,6 +1536,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5877586395525734275, guid: aedac70e42e6d1b4bb71e89db942a8a5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877586395525734275, guid: aedac70e42e6d1b4bb71e89db942a8a5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5877586396053603485, guid: aedac70e42e6d1b4bb71e89db942a8a5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1511,6 +1558,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5877586396338671336, guid: aedac70e42e6d1b4bb71e89db942a8a5, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877586396581868252, guid: aedac70e42e6d1b4bb71e89db942a8a5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877586396581868252, guid: aedac70e42e6d1b4bb71e89db942a8a5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877586396581868252, guid: aedac70e42e6d1b4bb71e89db942a8a5, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5877586396899506727, guid: aedac70e42e6d1b4bb71e89db942a8a5, type: 3}
@@ -1601,7 +1660,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChatBoxCanvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5877586395654729590, guid: aedac70e42e6d1b4bb71e89db942a8a5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aedac70e42e6d1b4bb71e89db942a8a5, type: 3}
 --- !u!114 &1179987589 stripped
 MonoBehaviour:

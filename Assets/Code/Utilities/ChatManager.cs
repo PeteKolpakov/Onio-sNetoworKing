@@ -17,7 +17,7 @@ namespace OniosNetworKing
         [SerializeField] private Color _playerMessage, _info;
         private void Start()
         {
-            _nickName = PhotonNetwork.LocalPlayer.NickName; 
+            _nickName = photonView.Owner.NickName; 
             SendMessageToChat("This is a beautiful DebugLine", Message.MessageType.Info);
 
         }
@@ -29,7 +29,7 @@ namespace OniosNetworKing
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
                     //RPC change
-                    photonView.RPC("RPC_SendMessageToChat", RpcTarget.All,false, $"{_nickName}:" + _chatBox.text,Message.MessageType.PlayerMesage);
+                    photonView.RPC("RPC_SendMessageToChat", RpcTarget.All, $"{_nickName}:" + _chatBox.text,Message.MessageType.PlayerMesage);
                     //SendMessageToChat(_nickName+": "+_chatBox.text,Message.MessageType.PlayerMesage);
                     _chatBox.text = "";
                 }
@@ -47,7 +47,7 @@ namespace OniosNetworKing
             }
         }
         [PunRPC]
-        private void RPC_SendMessageToChat(string message, Message.MessageType messageType)
+        public void RPC_SendMessageToChat(string message, Message.MessageType messageType)
         {
 
             if (_messageList.Count >= _maxMessageCount)
