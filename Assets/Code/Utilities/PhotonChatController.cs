@@ -25,7 +25,12 @@ namespace OniosNetworKing
         {
             Debug.Log("Connecting to Photon Chat");
             _chatClient.AuthValues = new Photon.Chat.AuthenticationValues(_nickName);
-            //ChatAppSettings chatAppSettings = PhotonNetwork.PhotonServerSettings.AppSettings.GetChatSettings();
+            ChatAppSettings chatAppSettings = PhotonNetwork.PhotonServerSettings.AppSettings.GetChatSettings();
+            _chatClient.ConnectUsingSettings(chatAppSettings);
+        }
+        public void SendDirectMessage(string recipient, string message)
+        {
+            _chatClient.SendPrivateMessage(recipient, message);
         }
 
         private void Update()
@@ -35,57 +40,67 @@ namespace OniosNetworKing
 
         public void DebugReturn(DebugLevel level, string message)
         {
-            throw new NotImplementedException();
+
         }
 
         public void OnDisconnected()
         {
-            throw new NotImplementedException();
+            Debug.Log("You have disconnected to the photon Chat");
         }
 
         public void OnConnected()
         {
-            throw new NotImplementedException();
+            Debug.Log("You have connected to the photon Chat");
+            SendDirectMessage("Brilliath", "Hi Brilliath");
         }
 
         public void OnChatStateChange(ChatState state)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void OnGetMessages(string channelName, string[] senders, object[] messages)
         {
-            throw new NotImplementedException();
+           
         }
 
         public void OnPrivateMessage(string sender, object message, string channelName)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrEmpty(message.ToString()))
+            {
+                //Chanel Name format [Sender:Recipient]
+                string[] splatnames = channelName.Split(new char[] {':'});
+                string senderName = splatnames[0];
+                if (!sender.Equals(senderName, StringComparison.OrdinalIgnoreCase))
+                {
+                    Debug.Log($"{ sender}:{ message}");
+                }
+            }
         }
 
         public void OnSubscribed(string[] channels, bool[] results)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void OnUnsubscribed(string[] channels)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void OnUserSubscribed(string channel, string user)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void OnUserUnsubscribed(string channel, string user)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

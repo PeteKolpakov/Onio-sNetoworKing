@@ -1,21 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Photon.Chat;
+using Photon.Realtime;
 
 namespace OniosNetworKing
 {
-    public class AppSettingsExtension : MonoBehaviour
+    public static class AppSettingsExtension
     {
-        // Start is called before the first frame update
-        void Start()
+        public static ChatAppSettings GetChatSettings(this AppSettings appSettings)
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            return new ChatAppSettings
+            {
+                AppIdChat = appSettings.AppIdChat,
+                AppVersion = appSettings.AppVersion,
+                FixedRegion = appSettings.IsBestRegion ? null : appSettings.FixedRegion,
+                NetworkLogging = appSettings.NetworkLogging,
+                Protocol = appSettings.Protocol,
+                Server = appSettings.IsDefaultNameServer ? null : appSettings.Server
+            };
         }
     }
 }
