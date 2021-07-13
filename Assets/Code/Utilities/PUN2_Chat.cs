@@ -6,18 +6,21 @@ using Photon.Realtime;
 
 public class PUN2_Chat : MonoBehaviourPun
 {
-    bool isChatting = false;
-    string chatInput = "";
+    private bool _isChatting = false;
+    private string _chatInput = "";
+
+    public int FontSize = 25; public int YOffSet = 25;
+    public int XOffset = 60;
 
     [System.Serializable]
     public class ChatMessage
     {
-        public string sender = "";
-        public string message = "";
-        public float timer = 0;
+        public string Sender = "";
+        public string Message = "";
+        public float Timer = 0;
     }
 
-    List<ChatMessage> chatMessages = new List<ChatMessage>();
+    private List<ChatMessage> _chatMessages = new List<ChatMessage>();
 
     void Start()
     {
@@ -35,56 +38,57 @@ public class PUN2_Chat : MonoBehaviourPun
 
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.T) && !isChatting)
+        if (Input.GetKeyUp(KeyCode.T) && !_isChatting)
         {
-            isChatting = true;
-            chatInput = "";
+            _isChatting = true;
+            _chatInput = "";
         }
 
         //Hide messages after timer is expired
-        for (int i = 0; i < chatMessages.Count; i++)
+        for (int i = 0; i < _chatMessages.Count; i++)
         {
-            if (chatMessages[i].timer > 0)
+            if (_chatMessages[i].Timer > 0)
             {
-                chatMessages[i].timer -= Time.deltaTime;
+                _chatMessages[i].Timer -= Time.deltaTime;
             }
         }
     }
 
     void OnGUI()
     {
-        if (!isChatting)
+        if (!_isChatting)
         {
-            GUI.Label(new Rect(5, Screen.height - 25, 200, 25), "Press 'T' to chat");
+            GUI.Label(new Rect(5, Screen.height - 50, 200, 50), "Press 'T' to chat");
         }
         else
         {
             if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return)
             {
-                isChatting = false;
-                if (chatInput.Replace(" ", "") != "")
+                _isChatting = false;
+                if (_chatInput.Replace(" ", "") != "")
                 {
                     //Send message
-                    photonView.RPC("SendChat", RpcTarget.All, PhotonNetwork.LocalPlayer, chatInput);
+                    photonView.RPC("SendChat", RpcTarget.All, PhotonNetwork.LocalPlayer, _chatInput);
                 }
-                chatInput = "";
+                _chatInput = "";
             }
 
             GUI.SetNextControlName("ChatField");
-            GUI.Label(new Rect(5, Screen.height - 25, 200, 25), "Say:");
+            GUI.Label(new Rect(5, Screen.height - YOffSet, 200, 50), "Say:");
             GUIStyle inputStyle = GUI.skin.GetStyle("box");
+            inputStyle.fontSize = FontSize;
             inputStyle.alignment = TextAnchor.MiddleLeft;
-            chatInput = GUI.TextField(new Rect(10 + 25, Screen.height - 27, 400, 22), chatInput, 60, inputStyle);
+            _chatInput = GUI.TextField(new Rect(XOffset, Screen.height - 50, 400, 50), _chatInput, 60, inputStyle);
 
             GUI.FocusControl("ChatField");
         }
 
         //Show messages
-        for (int i = 0; i < chatMessages.Count; i++)
+        for (int i = 0; i < _chatMessages.Count; i++)
         {
-            if (chatMessages[i].timer > 0 || isChatting)
+            if (_chatMessages[i].Timer > 0 || _isChatting)
             {
-                GUI.Label(new Rect(5, Screen.height - 50 - 25 * i, 500, 25), chatMessages[i].sender + ": " + chatMessages[i].message);
+                GUI.Label(new Rect(5, Screen.height - 100 - 40 * i, 500, 50), _chatMessages[i].Sender + ": " + _chatMessages[i].Message);
             }
         }
     }
@@ -93,14 +97,14 @@ public class PUN2_Chat : MonoBehaviourPun
     void SendChat(Player sender, string message)
     {
         ChatMessage m = new ChatMessage();
-        m.sender = sender.NickName;
-        m.message = message;
-        m.timer = 15.0f;
+        m.Sender = sender.NickName;
+        m.Message = message;
+        m.Timer = 15.0f;
 
-        chatMessages.Insert(0, m);
-        if (chatMessages.Count > 8)
+        _chatMessages.Insert(0, m);
+        if (_chatMessages.Count > 8)
         {
-            chatMessages.RemoveAt(chatMessages.Count - 1);
+            _chatMessages.RemoveAt(_chatMessages.Count - 1);
         }
     }
 }
