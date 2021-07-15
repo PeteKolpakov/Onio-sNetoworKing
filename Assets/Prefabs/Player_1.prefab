@@ -64,7 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a7c221b8ecdec49b616320d0fc7680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 8
+  _speed: 30
+  Nickname: {fileID: 0}
 --- !u!33 &4371008944624804405
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -141,7 +142,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &5052157762450078244
 MonoBehaviour:
@@ -274,7 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72096164312b354e8b2b50a45f90db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Nickname: {fileID: 4835685232782155220}
 --- !u!114 &4835685232782155220
 MonoBehaviour:
   m_ObjectHideFlags: 0

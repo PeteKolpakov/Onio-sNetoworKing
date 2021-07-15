@@ -49,7 +49,7 @@ namespace Assets.Code
         }
         private void FixedUpdate()
         {
-            _rb.MovePosition(transform.position += _direction * _speed * Time.fixedDeltaTime);
+            _rb.velocity = _direction * _speed;
         }
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
