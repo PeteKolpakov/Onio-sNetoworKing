@@ -61,7 +61,7 @@ namespace OniosNetworKing
 
                     if (GUILayout.Button("Create a Room"))
                     {
-                        connectionModel.CreateRandom();
+                        connectionModel.CreateRoom();
                     }
                     if (GUILayout.Button("Join a Random Room"))
                     {

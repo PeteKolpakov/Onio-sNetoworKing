@@ -23,9 +23,14 @@ namespace OniosNetworKing
             PhotonNetwork.ConnectUsingSettings();
         }
 
-        public void CreateRandom()
+        public void CreateRoom()
         {
-            PhotonNetwork.CreateRoom("Onio Test Chamber");
+            PhotonNetwork.CreateRoom("default Room Name");
+        }
+
+        public void CreateRoom(string name)
+        {
+            PhotonNetwork.CreateRoom(name);
         }
 
         internal void JoinRandomRoom()
