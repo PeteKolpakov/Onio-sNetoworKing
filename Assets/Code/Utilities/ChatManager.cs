@@ -35,8 +35,10 @@ namespace OniosNetworKing
         }
         void Update()
         {
+            //CheckMessagesOcclussion();
             //This To Freeze the player's movement, based on whether the input field is selected or not.
             CheckInputFieldFocus();
+            //CheckPlayerCount();
 
             if (_chatBox.text != "")
             {
@@ -55,6 +57,19 @@ namespace OniosNetworKing
                 _chatBox.DeactivateInputField();
             }
         }
+
+        private void CheckMessagesOcclussion()
+        {
+            //for (int i = 0; i < _messageList.Count; i++)
+            //{
+            //    _messageList[i]
+            //}
+        }
+
+        //private void OnPlayerDisconnected(NetworkPlayer player)
+        //{
+
+        //}
 
         private void CheckInputFieldFocus()
         {
@@ -80,6 +95,19 @@ namespace OniosNetworKing
                 else if (_chatBox.text.Substring(1,1) == "n")
                 {
                     RPC_SendMessageToChat("Please write your new nickname", Message.MessageType.Info);
+                    if(_chatBox.text !="")
+                    {
+                        _chatBox.text = "";
+                        _chatBox.ActivateInputField();
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            RenameLocalPlayerTo(_chatBox.text);
+                        }
+                    }
+                    else
+                    {
+                        RPC_SendMessageToChat("There was an error when inputing the new nickname. Please try again", Message.MessageType.Error);
+                    }
                 }
             }
             else
@@ -87,7 +115,10 @@ namespace OniosNetworKing
                 SendMessageToChat($"{_nickName}:" + _chatBox.text, Message.MessageType.PlayerMesage);
             }
         }
-
+        public void RenameLocalPlayerTo(string newName)
+        {
+            PhotonNetwork.LocalPlayer.NickName = newName;
+        }
         public void SendMessageToChat(string message, Message.MessageType messageType)
         {
             photonView.RPC(nameof(RPC_SendMessageToChat), RpcTarget.All, message, messageType);
