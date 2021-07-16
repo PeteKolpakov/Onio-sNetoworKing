@@ -26,8 +26,7 @@ namespace OniosNetworKing
             _nickName = photonView.Owner.NickName;
             RPC_SendMessageToChat($"{_nickName}: has joined!", Message.MessageType.Info);
             RPC_SendMessageToChat("Welcome! Click on the input field or press the Enter key to use the chat", Message.MessageType.Info);
-            RPC_SendMessageToChat("You can change your text color by writting '/c'", Message.MessageType.Info);
-            //RPC_SendMessageToChat("You can change your text color by writting ")
+            RPC_SendMessageToChat("Write /h to see available commands", Message.MessageType.Info);
             if (!PhotonNetwork.IsConnected)
             {
                 RPC_SendMessageToChat($"Not connected to Photon Server", Message.MessageType.Error);
