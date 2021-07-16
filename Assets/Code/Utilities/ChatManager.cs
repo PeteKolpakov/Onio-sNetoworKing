@@ -22,13 +22,11 @@ namespace OniosNetworKing
         [SerializeField] private Color _whitePlayerMessage, _info, _greenPlayerMessage, _errorColor;
         private void Start()
         {
-            Debug.Log($"Connection to The Server is: " + PhotonNetwork.IsConnected);
-            _nickName = PhotonNetwork.LocalPlayer.NickName;
-            //_nickName = photonView.Owner.NickName;
-            //SendMessageToChat($"{_nickName}: has joined!", Message.MessageType.Info);
-            //SendMessageToChat("Welcome! Click on the input field or press the Enter key to use the chat", Message.MessageType.Info);
+            //_nickName = PhotonNetwork.LocalPlayer.NickName;
+            _nickName = photonView.Owner.NickName;
+            RPC_SendMessageToChat($"{_nickName}: has joined!", Message.MessageType.Info);
             RPC_SendMessageToChat("Welcome! Click on the input field or press the Enter key to use the chat", Message.MessageType.Info);
-            //SendMessageToChat("You can change your text color by writting '/c'", Message.MessageType.Info);
+            RPC_SendMessageToChat("You can change your text color by writting '/c'", Message.MessageType.Info);
             //RPC_SendMessageToChat("You can change your text color by writting ")
             if (!PhotonNetwork.IsConnected)
             {
@@ -38,8 +36,6 @@ namespace OniosNetworKing
         }
         void Update()
         {
-
-            Debug.Log($"Connection to The Server is: " + PhotonNetwork.IsConnected);
             //This To Freeze the player's movement, based on whether the input field is selected or not.
             CheckInputFieldFocus();
 
@@ -73,15 +69,19 @@ namespace OniosNetworKing
         {
             if (_chatBox.text.Substring(0, 1) == "/")
             {
+                if(_chatBox.text.Substring(1,1)== "h")
+                {
+                    RPC_SendMessageToChat("There are currently 2 commands. Write /c to change the color of your text. Write /n to change your nickname", Message.MessageType.Info);
+                }
                 if(_chatBox.text.Substring(1, 1) == "c")
                 {
-                    SendMessageToChat($"You have changed your text color! To go back to the old color, write /c in a new line", Message.MessageType.Info);
+                    RPC_SendMessageToChat("You have changed your text color! To go back to the old color, write /c in a new line", Message.MessageType.Info);
                     _changedColor = !_changedColor;
                 }
-                //else if (_chatBox.text.Substring(1,1) == "n")
-                //{
-                //    return;
-                //}
+                else if (_chatBox.text.Substring(1,1) == "n")
+                {
+                    RPC_SendMessageToChat("Please write your new nickname", Message.MessageType.Info);
+                }
             }
             else
             {
