@@ -615,6 +615,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1009464781}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &546940510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,6 +1077,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1009464782}
+  - component: {fileID: 1009464786}
   - component: {fileID: 1009464785}
   - component: {fileID: 1009464784}
   - component: {fileID: 1009464783}
@@ -1138,7 +1151,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1009464784}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1009464786}
+        m_TargetAssemblyTypeName: OniosNetworKing.Assets.Code.Menus.ConnectionMenu.StartButton,
+          Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1009464784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,6 +1203,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009464781}
   m_CullTransparentMesh: 1
+--- !u!114 &1009464786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009464781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 986dfbd777619184f949e5b463315c91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _connectionModel: {fileID: 350783897}
 --- !u!1 &1038478703
 GameObject:
   m_ObjectHideFlags: 0
