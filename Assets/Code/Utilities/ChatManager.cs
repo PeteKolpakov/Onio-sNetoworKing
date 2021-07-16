@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,43 +10,60 @@ namespace OniosNetworKing
 {
     public class ChatManager : MonoBehaviourPun, IPunObservable
     {
+        public bool IsChatting = false, ChangedColor = false;
+
         [SerializeField] private string _nickName;
-        [SerializeField][Range(0,25)] private int _maxMessageCount = 25;
+        [SerializeField] [Range(0, 25)] private int _maxMessageCount = 25;
         [SerializeField] private List<Message> _messageList = new List<Message>();
         [SerializeField] private GameObject _chatPannel, _textObject;
         [SerializeField] private TMP_InputField _chatBox;
-        [SerializeField] private Color _playerMessage, _info;
+        [SerializeField] private Color _whitePlayerMessage, _info, _greenPlayerMessage, _errorColor;
         private void Start()
         {
-            _nickName = photonView.Owner.NickName; 
-            SendMessageToChat("This is a beautiful DebugLine", Message.MessageType.Info);
-
+            //_nickName = PhotonNetwork.LocalPlayer.NickName;
+            //_nickName = photonView.Owner.NickName;
+            //SendMessageToChat($"{_nickName}: has joined!", Message.MessageType.Info);
+            SendMessageToChat("Welcome! Click on the input field or press the Enter key to use the chat", Message.MessageType.Info);
+            SendMessageToChat("You can change your text color by writting '/c'", Message.MessageType.Info);
         }
         void Update()
         {
-            //if(photonView.IsMine){}
-            if(_chatBox.text != "")
+            //This To Freeze the player's movement, based on whether the input field is selected or not.
+            if (_chatBox.isFocused)
+                IsChatting = true;
+            else
+                IsChatting = false;
+
+            if (_chatBox.text != "")
             {
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    //RPC change
-                    photonView.RPC("RPC_SendMessageToChat", RpcTarget.All, $"{_nickName}:" + _chatBox.text,Message.MessageType.PlayerMesage);
-                    //SendMessageToChat(_nickName+": "+_chatBox.text,Message.MessageType.PlayerMesage);
+                    if (_chatBox.text.Substring(0, 2) == "/c")
+                    {
+                        SendMessageToChat($"You have changed your text color! To go back to the old color, write /c in a new line", Message.MessageType.Info);
+                        ChangedColor = !ChangedColor;
+                    }
+                    else
+                    {
+                        SendMessageToChat($"{_nickName}:" + _chatBox.text, Message.MessageType.PlayerMesage);
+                    }
                     _chatBox.text = "";
                 }
             }
-            else if(!_chatBox.isFocused && Input.GetKeyDown(KeyCode.Return))
+            else if (!_chatBox.isFocused && Input.GetKeyDown(KeyCode.Return))
             {
                 _chatBox.ActivateInputField();
             }
-            if (!_chatBox.isFocused)
+            else if (_chatBox.isFocused && _chatBox.text == "" && Input.GetKeyDown(KeyCode.Return))
             {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    SendMessageToChat("You pressed the space key!", Message.MessageType.Info);
-                }
+                _chatBox.DeactivateInputField();
             }
         }
+        public void SendMessageToChat(string message, Message.MessageType messageType)
+        {
+            photonView.RPC(nameof(RPC_SendMessageToChat), RpcTarget.All, message, messageType);
+        }
+
         [PunRPC]
         public void RPC_SendMessageToChat(string message, Message.MessageType messageType)
         {
@@ -64,12 +82,18 @@ namespace OniosNetworKing
             newMessage.TextObject = newText.GetComponent<TextMeshProUGUI>();
 
             newMessage.TextObject.text = newMessage.Text;
-            newMessage.TextObject.color = MessageTypeColor(messageType);
+
+            if (ChangedColor == false || messageType!=Message.MessageType.PlayerMesage)
+            {
+                newMessage.TextObject.color = MessageTypeColor(messageType);
+            }
+            else if (ChangedColor && messageType ==Message.MessageType.PlayerMesage)
+            {
+                //I also don't like this, but got a bit to messy to keep adding things for the sake of it without having them working correctly
+                newMessage.TextObject.color = _greenPlayerMessage;
+            }
 
             _messageList.Add(newMessage);
-        }
-        public void SendMessageToChat(string message, Message.MessageType messageType)
-        {
         }
         private Color MessageTypeColor(Message.MessageType messageType)
         {
@@ -77,10 +101,13 @@ namespace OniosNetworKing
             switch (messageType)
             {
                 case Message.MessageType.PlayerMesage:
-                    color = _playerMessage;
+                    color = _whitePlayerMessage;
                     break;
                 case Message.MessageType.Info:
                     color = _info;
+                    break;
+                case Message.MessageType.Error:
+                    color = _errorColor;
                     break;
                 default:
                     break;
@@ -103,7 +130,8 @@ namespace OniosNetworKing
         public enum MessageType
         {
             PlayerMesage,
-            Info
+            Info,
+            Error
         }
     }
 }

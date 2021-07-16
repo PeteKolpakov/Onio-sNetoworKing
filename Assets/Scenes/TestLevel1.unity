@@ -1415,7 +1415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1941750645231637004, guid: 4fd11a4527e9fc944adf2e32445b26eb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fd11a4527e9fc944adf2e32445b26eb, type: 3}
@@ -2313,41 +2313,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7405072702613911025, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 2012814669, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
+      propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7405072702613911025, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7405072702857218501, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7405072702857218501, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
+    - target: {fileID: 7405072702613911025, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7405072702857218501, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7405072703366938500, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7405072703366938500, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7405072703912928410, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7405072703912928410, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7405072704008309561, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
       propertyPath: m_RootOrder
@@ -2396,10 +2380,6 @@ PrefabInstance:
     - target: {fileID: 7405072704008309563, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
       propertyPath: m_Name
       value: ChatManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7405072704008309563, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bdb1f5c2ca4a9046901471df8dbbefc, type: 3}
