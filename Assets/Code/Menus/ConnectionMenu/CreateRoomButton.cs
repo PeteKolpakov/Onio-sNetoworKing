@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
 namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
 {
@@ -15,11 +16,11 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
 
         public void CreateRoomWithNameFromInput()  
         {
+            if (!PhotonNetwork.IsConnected)
+                return;
+
             connectionModel.CreateRoom(_roomNameInput.text);
             Debug.Log("room made with name " + _roomNameInput.text);
         }
-
-        
-
     }
 }

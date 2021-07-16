@@ -27,7 +27,7 @@ namespace OniosNetworKing.Assets.Code
 
         private void Update()
         {
-            if (_playerTwoWon && _playerTwoWon)
+            if (_playerOneWon && _playerTwoWon)
             {
                 TriggerWin();
             }

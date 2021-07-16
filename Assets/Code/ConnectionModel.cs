@@ -11,7 +11,8 @@ namespace OniosNetworKing
     {
         List<RoomInfo> availableRooms;
 
-        public event System.Action<string> ConnectionError;
+        public event Action<string> ConnectionError;
+
 
         private void Start()
         {
@@ -30,7 +31,7 @@ namespace OniosNetworKing
 
         public void CreateRoom(string name)
         {
-            PhotonNetwork.CreateRoom(name);
+            PhotonNetwork.CreateRoom(name);           
         }
 
         internal void JoinRandomRoom()
@@ -78,6 +79,10 @@ namespace OniosNetworKing
             ConnectionError?.Invoke("Join Room Failed: " + message);
         }
 
+        public override void OnConnectedToMaster()
+        {
+            JoinDefaultLobby();
+        }
         internal void StartGame()
         {
             if(PhotonNetwork.IsConnectedAndReady && PhotonNetwork.IsMasterClient)
