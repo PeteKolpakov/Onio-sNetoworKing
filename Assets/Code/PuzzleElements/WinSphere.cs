@@ -9,8 +9,7 @@ namespace OniosNetworKing.Assets.Code
 {
     class WinSphere : MonoBehaviourPunCallbacks
     {
-        private bool _playerOneWon = false;
-        private bool _playerTwoWon = false;
+        private bool _playersWon = false;
         private List<Player> _playersTouchingMe = new List<Player>();
         private void OnTriggerEnter(Collider other)
         {
@@ -31,8 +30,12 @@ namespace OniosNetworKing.Assets.Code
             }
         }
         private void TriggerWin()
-        {            
-            PhotonNetwork.LoadLevel(3);
+        {
+            if (!_playersWon)
+            {
+                PhotonNetwork.LoadLevel(3);
+                _playersWon = true;
+            }
         }
 
     }
