@@ -15,7 +15,10 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
         {
             if (!PhotonNetwork.IsMasterClient)
                 return;
-          
+
+            if (!PhotonNetwork.OfflineMode && PhotonNetwork.PlayerList.Length <= 0)
+                return;
+
             _connectionModel.StartGame();
         }
     }

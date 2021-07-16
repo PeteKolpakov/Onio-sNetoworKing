@@ -27,7 +27,8 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
                 return;
             }
 
-            _connectionModel.CreateRoom(_roomNameInput.text);            
+            _connectionModel.CreateRoom(_roomNameInput.text);
+            _statusDisplay.WriteToStatusBar($"Room Created With Name {_roomNameInput.text}");
         }
     }
 }

@@ -13,15 +13,7 @@ namespace OniosNetworKing.Assets.Code
 
         public void SetPlayerName()
         {
-            if (_nameInput.text != "")
-            {
-                _connectionModel.RenameLocalPlayerTo(_nameInput.text);
-            }
-            else
-            {
-                _connectionModel.RenameLocalPlayerTo(_defaultName);
-            }
+            _connectionModel.RenameLocalPlayerTo(_nameInput.text);       
         }
-
     }
 }
