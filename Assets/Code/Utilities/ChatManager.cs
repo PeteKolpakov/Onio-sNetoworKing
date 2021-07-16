@@ -105,34 +105,14 @@ namespace OniosNetworKing
             {
                 if (_chatBox.text.Substring(1, 1) == "h")
                 {
-                    RPC_SendMessageToChat("There are currently 2 commands. Write /c to change the color of your text. Write /n to change your nickname", Message.MessageType.Info);
+                    RPC_SendMessageToChat("There are currently 2 commands. Write /c to change the color of your text. Write /h to see possible commands", Message.MessageType.Info);
                 }
                 else if (_chatBox.text.Substring(1, 1) == "c")
                 {
                     RPC_SendMessageToChat("You have changed your text color! To go back to the old color, write /c in a new line", Message.MessageType.Info);
                     _changedColor = !_changedColor;
                 }
-                else if (_chatBox.text.Substring(1, 1) == "n")
-                {
-                    RPC_SendMessageToChat("Please write your new nickname", Message.MessageType.Info);
-                    _chatBox.text = "";
-                    if (_chatBox.text == "")
-                    {
-                        _chatBox.ActivateInputField();
-                        if (Input.GetKeyDown(KeyCode.Return) && _chatBox.text == "")
-                        {
-                            new WaitForSeconds(3);
-                            string newNickname = _chatBox.text;
-                            _nickName = newNickname;
-                            Debug.Log(newNickname);
-                        }
-                    }
-                    else
-                    {
-                        RPC_SendMessageToChat("There was an error when inputing the new nickname. Please try again", Message.MessageType.Error);
-                    }
-                }
-                else if (_chatBox.text.Substring(1, 1) != "n" || _chatBox.text.Substring(1, 1) != "c" || _chatBox.text.Substring(1, 1) != "h")
+                else if ( _chatBox.text.Substring(1, 1) != "c" || _chatBox.text.Substring(1, 1) != "h")
                 {
                     RPC_SendMessageToChat("There was an error when inputing the commands. Please try again", Message.MessageType.Error);
                 }
