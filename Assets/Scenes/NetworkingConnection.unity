@@ -2175,6 +2175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _connectionModel: {fileID: 350783897}
+  _statusBar: {fileID: 1335020770}
 --- !u!1 &1554681751
 GameObject:
   m_ObjectHideFlags: 0

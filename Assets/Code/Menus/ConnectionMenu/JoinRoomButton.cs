@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OniosNetworKing.Assets.Code.ConnectionMenu;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,30 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
     {
         [SerializeField]
         private ConnectionModel _connectionModel;
-        public void JoinRoom()
+        [SerializeField]
+        private StatusBar _statusBar;
+
+
+        public string GetDestinationRoomName()
         {
-            _connectionModel.JoinRandomRoom();
+            if (_connectionModel.GetLastRoomCreated() != null)
+            {
+                return _connectionModel.GetLastRoomCreated().Name;
+            }
+            else return null;
         }
 
+        public void JoinRoom()
+        {
+            if (GetDestinationRoomName() != null)
+            {
+                _connectionModel.JoinRoom(GetDestinationRoomName());
+            }
+            else
+            {
+                _statusBar.WriteToStatusBar("Error: No Room Available To Join");
+            }
+
+        }
     }
 }
