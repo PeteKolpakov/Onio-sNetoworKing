@@ -24,8 +24,8 @@ namespace OniosNetworKing
         [SerializeField] private Color _whitePlayerMessage, _info, _greenPlayerMessage, _errorColor, _alphaFade, _oldTextColor;
         private void Start()
         {
-            //_nickName = PhotonNetwork.LocalPlayer.NickName;
-            _nickName = photonView.Owner.NickName;
+            _nickName = PhotonNetwork.LocalPlayer.NickName;
+            //_nickName = photonView.Owner.NickName;
             SendMessageToChat($"{_nickName}: has joined!", Message.MessageType.Info);
             SendMessageToChat("Welcome! Click on the input field or press the Enter key to use the chat", Message.MessageType.Info);
             SendMessageToChat("Write /h to see available commands", Message.MessageType.Info);
