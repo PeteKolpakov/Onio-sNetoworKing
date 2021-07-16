@@ -1494,13 +1494,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsChatting: 0
-  ChangedColor: 0
-  _nickName: DanielEditor
-  _maxMessageCount: 25
-  _messageList: []
   _chatPannel: {fileID: 7405072703246963811}
   _textObject: {fileID: 5877404458883430980, guid: f0e505efe0809a24694ec00285528103, type: 3}
+  _nickName: Editor
   _chatBox: {fileID: 7405072703095222932}
+  _messageList: []
+  _maxMessageCount: 25
   _whitePlayerMessage: {r: 1, g: 1, b: 1, a: 1}
   _info: {r: 1, g: 0.8520418, b: 0, a: 1}
   _greenPlayerMessage: {r: 0.25915027, g: 0.8867924, b: 0.12967247, a: 1}
