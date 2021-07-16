@@ -19,8 +19,7 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
             if (!PhotonNetwork.IsConnected)
                 return;
 
-            connectionModel.CreateRoom(_roomNameInput.text);
-            Debug.Log("room made with name " + _roomNameInput.text);
+            connectionModel.CreateRoom(_roomNameInput.text);            
         }
     }
 }

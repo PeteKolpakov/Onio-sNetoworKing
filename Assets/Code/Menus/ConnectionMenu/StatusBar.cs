@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
 namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
 {
@@ -18,11 +19,11 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
             _textDisplay = GetComponent<TextMeshProUGUI>();
         }
 
-        private void OnError(string message)
+        private void Update()
         {
             if (_textDisplay != null)
             {
-                _textDisplay.text = "Status: ERROR: " + message;
+                _textDisplay.text = "State: " + PhotonNetwork.NetworkClientState;
             }
         }
     }
