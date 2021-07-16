@@ -7,34 +7,31 @@ using UnityEngine.SceneManagement;
 
 namespace OniosNetworKing.Assets.Code
 {
-    class WinSphere : MonoBehaviour
+    class WinSphere : MonoBehaviourPunCallbacks
     {
         private bool _playerOneWon = false;
         private bool _playerTwoWon = false;
+        private List<Player> _playersTouchingMe = new List<Player>();
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent<Player>(out Player player))
             {
-                if (player.GetPlayerID() == 0)
+                if (!_playersTouchingMe.Contains(player))
                 {
-                    _playerOneWon = true;
-                }
-                if (player.GetPlayerID() == 1)
-                {
-                    _playerTwoWon = true;
+                    _playersTouchingMe.Add(player);
                 }
             }
         }
 
         private void Update()
         {
-            if (_playerOneWon && _playerTwoWon)
+            if (_playersTouchingMe.Count >= 2)
             {
                 TriggerWin();
             }
         }
         private void TriggerWin()
-        {
+        {            
             PhotonNetwork.LoadLevel(3);
         }
 

@@ -7,7 +7,6 @@ namespace OniosNetworKing.Assets.Code
     {
         [SerializeField]
         private TMP_InputField _nameInput;
-        private string _defaultName = "Player";
         [SerializeField]
         private ConnectionModel _connectionModel;
 
