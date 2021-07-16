@@ -7,9 +7,11 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
 {
     class JoinRoomButton : MonoBehaviour
     {
-        private void JoinRoom()
+        [SerializeField]
+        private ConnectionModel _connectionModel;
+        public void JoinRoom()
         {
-
+            _connectionModel.JoinRandomRoom();
         }
 
     }
