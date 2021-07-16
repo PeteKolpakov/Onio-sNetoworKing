@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +35,7 @@ namespace OniosNetworKing.Assets.Code
         }
         private void TriggerWin()
         {
-            SceneManager.LoadScene(2);
+            PhotonNetwork.LoadLevel(3);
         }
 
     }
