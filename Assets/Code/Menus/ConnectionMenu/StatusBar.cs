@@ -11,25 +11,27 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
     {
         [SerializeField]
         private ConnectionModel _connectionModel;
-        private TextMeshProUGUI _textDisplay;
+        [SerializeField]
+        private TextMeshProUGUI _targetTextDisplay;
 
         private void Start()
         {
             _connectionModel.ConnectionError += OnError;
-            _textDisplay = GetComponent<TextMeshProUGUI>();
         }
 
         private void OnError(string obj)
         {
-            _textDisplay.text = "State: Error" + obj;
+            _targetTextDisplay.text = "State: Error" + obj;
+        }
+
+        public void WriteToStatusBar(string message)
+        {
+            _targetTextDisplay.text = "State: " + message; 
         }
 
         private void Update()
-        {
-            if (_textDisplay != null)
-            {
-                _textDisplay.text = "State: " + PhotonNetwork.NetworkClientState;
-            }
+        {            
+            _targetTextDisplay.SetText("State: " + PhotonNetwork.NetworkClientState.ToString());           
         }
     }
 }
