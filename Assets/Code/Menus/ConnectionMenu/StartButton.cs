@@ -14,6 +14,5 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
         {
             _connectionModel.StartGame();
         }
-
     }
 }
