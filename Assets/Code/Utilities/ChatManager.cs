@@ -78,10 +78,10 @@ namespace OniosNetworKing
                     SendMessageToChat($"You have changed your text color! To go back to the old color, write /c in a new line", Message.MessageType.Info);
                     _changedColor = !_changedColor;
                 }
-                else if (_chatBox.text.Substring(1,1) == "n")
-                {
-
-                }
+                //else if (_chatBox.text.Substring(1,1) == "n")
+                //{
+                //    return;
+                //}
             }
             else
             {
