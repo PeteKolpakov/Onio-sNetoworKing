@@ -1,4 +1,5 @@
 ﻿using OniosNetworKing.Assets.Code.ConnectionMenu;
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
 {
-    class JoinRoomButton : MonoBehaviour
+    class JoinRoomButton : MonoBehaviourPun
     {
         [SerializeField]
         private ConnectionModel _connectionModel;
@@ -25,6 +26,10 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
 
         public void JoinRoom()
         {
+            if (PhotonNetwork.IsMasterClient)
+                return;
+
+            
             if (GetDestinationRoomName() != null)
             {
                 _connectionModel.JoinRoom(GetDestinationRoomName());
