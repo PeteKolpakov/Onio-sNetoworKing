@@ -27,7 +27,9 @@ namespace OniosNetworKing
             //_nickName = photonView.Owner.NickName;
             //SendMessageToChat($"{_nickName}: has joined!", Message.MessageType.Info);
             //SendMessageToChat("Welcome! Click on the input field or press the Enter key to use the chat", Message.MessageType.Info);
+            RPC_SendMessageToChat("Welcome! Click on the input field or press the Enter key to use the chat", Message.MessageType.Info);
             //SendMessageToChat("You can change your text color by writting '/c'", Message.MessageType.Info);
+            //RPC_SendMessageToChat("You can change your text color by writting ")
             if (!PhotonNetwork.IsConnected)
             {
                 RPC_SendMessageToChat($"Not connected to Photon Server", Message.MessageType.Error);
@@ -69,10 +71,17 @@ namespace OniosNetworKing
 
         private void CheckForTypeOfInput()
         {
-            if (_chatBox.text.Substring(0, 1) == "/" && _chatBox.text.Substring(1, 1) == "c")
+            if (_chatBox.text.Substring(0, 1) == "/")
             {
-                SendMessageToChat($"You have changed your text color! To go back to the old color, write /c in a new line", Message.MessageType.Info);
-                _changedColor = !_changedColor;
+                if(_chatBox.text.Substring(1, 1) == "c")
+                {
+                    SendMessageToChat($"You have changed your text color! To go back to the old color, write /c in a new line", Message.MessageType.Info);
+                    _changedColor = !_changedColor;
+                }
+                else if (_chatBox.text.Substring(1,1) == "n")
+                {
+
+                }
             }
             else
             {
