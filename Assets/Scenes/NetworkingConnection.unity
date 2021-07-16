@@ -680,6 +680,7 @@ MonoBehaviour:
   _roomNameInput: {fileID: 1175271391}
   _connectionModel: {fileID: 350783897}
   _statusDisplay: {fileID: 1335020770}
+  _roomDisplay: {fileID: 1435031318}
 --- !u!1 &747647360
 GameObject:
   m_ObjectHideFlags: 0
