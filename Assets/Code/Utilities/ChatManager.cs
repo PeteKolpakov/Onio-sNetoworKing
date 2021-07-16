@@ -13,13 +13,15 @@ namespace OniosNetworKing
         public static bool IsChatting = false;
 
         private bool _changedColor = false;
+        private float _originalAlpha = 100;
+        private float _timer = 3;
 
         [SerializeField] private GameObject _chatPannel, _textObject;
         [SerializeField] private string _nickName;
         [SerializeField] private TMP_InputField _chatBox;
         [SerializeField] private List<Message> _messageList = new List<Message>();
         [SerializeField] [Range(0, 25)] private int _maxMessageCount = 25;
-        [SerializeField] private Color _whitePlayerMessage, _info, _greenPlayerMessage, _errorColor;
+        [SerializeField] private Color _whitePlayerMessage, _info, _greenPlayerMessage, _errorColor, _alphaFade, _oldTextColor;
         private void Start()
         {
             //_nickName = PhotonNetwork.LocalPlayer.NickName;
@@ -35,10 +37,11 @@ namespace OniosNetworKing
         }
         void Update()
         {
-            //CheckMessagesOcclussion();
+
+            CheckMessagesOcclussion();
+
             //This To Freeze the player's movement, based on whether the input field is selected or not.
             CheckInputFieldFocus();
-            //CheckPlayerCount();
 
             if (_chatBox.text != "")
             {
@@ -60,16 +63,33 @@ namespace OniosNetworKing
 
         private void CheckMessagesOcclussion()
         {
-            //for (int i = 0; i < _messageList.Count; i++)
-            //{
-            //    _messageList[i]
-            //}
+            if (!IsChatting && _alphaFade.a != (byte)0)
+            {
+                for (int i = 0; i < _messageList.Count; i++)
+                {
+                    _alphaFade = _chatBox.GetComponent<Image>().color;
+                    _alphaFade = new Color32((byte)_alphaFade.r, (byte)_alphaFade.g, (byte)_alphaFade.b, (byte)0);
+                    _oldTextColor = _messageList[i].TextObject.faceColor;
+                    _oldTextColor = new Color32((byte)_oldTextColor.r, (byte)_oldTextColor.g, (byte)_oldTextColor.b, (byte)0);
+
+                    _chatBox.GetComponent<Image>().color = _alphaFade;
+                    _messageList[i].TextObject.faceColor = _oldTextColor;
+                }
+            }
+            else if (IsChatting && _alphaFade.a != (byte)0)
+            {
+                for (int i = 0; i < _messageList.Count; i++)
+                {
+                    _alphaFade = _chatBox.GetComponent<Image>().color;
+                    _alphaFade = new Color32((byte)_alphaFade.r, (byte)_alphaFade.g, (byte)_alphaFade.b, (byte)_originalAlpha);
+                    _oldTextColor = _messageList[i].TextObject.faceColor;
+                    _oldTextColor = new Color32((byte)_oldTextColor.r, (byte)_oldTextColor.g, (byte)_oldTextColor.b, (byte)_originalAlpha);
+
+                    _chatBox.GetComponent<Image>().color = _alphaFade;
+                    _messageList[i].TextObject.faceColor = _oldTextColor;
+                }
+            }
         }
-
-        //private void OnPlayerDisconnected(NetworkPlayer player)
-        //{
-
-        //}
 
         private void CheckInputFieldFocus()
         {
@@ -83,31 +103,38 @@ namespace OniosNetworKing
         {
             if (_chatBox.text.Substring(0, 1) == "/")
             {
-                if(_chatBox.text.Substring(1,1)== "h")
+                if (_chatBox.text.Substring(1, 1) == "h")
                 {
                     RPC_SendMessageToChat("There are currently 2 commands. Write /c to change the color of your text. Write /n to change your nickname", Message.MessageType.Info);
                 }
-                if(_chatBox.text.Substring(1, 1) == "c")
+                else if (_chatBox.text.Substring(1, 1) == "c")
                 {
                     RPC_SendMessageToChat("You have changed your text color! To go back to the old color, write /c in a new line", Message.MessageType.Info);
                     _changedColor = !_changedColor;
                 }
-                else if (_chatBox.text.Substring(1,1) == "n")
+                else if (_chatBox.text.Substring(1, 1) == "n")
                 {
                     RPC_SendMessageToChat("Please write your new nickname", Message.MessageType.Info);
-                    if(_chatBox.text !="")
+                    _chatBox.text = "";
+                    if (_chatBox.text == "")
                     {
-                        _chatBox.text = "";
                         _chatBox.ActivateInputField();
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) && _chatBox.text == "")
                         {
-                            RenameLocalPlayerTo(_chatBox.text);
+                            new WaitForSeconds(3);
+                            string newNickname = _chatBox.text;
+                            _nickName = newNickname;
+                            Debug.Log(newNickname);
                         }
                     }
                     else
                     {
                         RPC_SendMessageToChat("There was an error when inputing the new nickname. Please try again", Message.MessageType.Error);
                     }
+                }
+                else if (_chatBox.text.Substring(1, 1) != "n" || _chatBox.text.Substring(1, 1) != "c" || _chatBox.text.Substring(1, 1) != "h")
+                {
+                    RPC_SendMessageToChat("There was an error when inputing the commands. Please try again", Message.MessageType.Error);
                 }
             }
             else
