@@ -138,7 +138,7 @@ namespace OniosNetworKing
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
     [Serializable]
