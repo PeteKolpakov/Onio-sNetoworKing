@@ -13,8 +13,7 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
         private TextMeshProUGUI _text;
         public void SetText(RoomInfo roomInfo)
         {
-            _text.text = roomInfo.Name;
+            _text.text = roomInfo.Name + ": Players" + roomInfo.PlayerCount;
         }
-
     }
 }

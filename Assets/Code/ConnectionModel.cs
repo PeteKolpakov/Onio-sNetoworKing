@@ -64,6 +64,15 @@ namespace OniosNetworKing
             return availableRooms;
         }
 
+        public RoomInfo GetLastRoomCreated()
+        {
+            if (availableRooms.Count > 0)
+            {
+                return availableRooms[0];
+            }
+            else return null;
+        }
+
         public override void OnCreateRoomFailed(short returnCode, string message)
         {
             ConnectionError?.Invoke("Create Room Failed: " + message);

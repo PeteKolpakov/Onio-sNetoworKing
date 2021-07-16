@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace OniosNetworKing.Assets.Code.ConnectionMenu
 {
-    class RoomListUI : MonoBehaviourPunCallbacks
+    class RoomListDisplay : MonoBehaviourPunCallbacks
     {
         [SerializeField]
         private ConnectionModel _connectionModel;
