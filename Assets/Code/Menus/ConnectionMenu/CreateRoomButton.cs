@@ -12,20 +12,22 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
         [SerializeField]
         private TMP_InputField _roomNameInput;
         [SerializeField]
-        private ConnectionModel connectionModel;
+        private ConnectionModel _connectionModel;
+        [SerializeField]
+        private StatusBar _statusDisplay;
 
         public void CreateRoomWithNameFromInput()  
         {
             if (!PhotonNetwork.IsConnected)
                 return;
 
-            if (connectionModel.GetAllRooms().Count > 1)
+            if (_connectionModel.GetAllRooms().Count >= 1)
             {
-                Debug.Log("youve already got a room fool, don't get greedy");
+                _statusDisplay.WriteToStatusBar("youve already got a room fool, don't get greedy");
                 return;
             }
 
-            connectionModel.CreateRoom(_roomNameInput.text);            
+            _connectionModel.CreateRoom(_roomNameInput.text);            
         }
     }
 }
