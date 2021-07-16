@@ -7,7 +7,7 @@ using Photon.Pun;
 
 namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
 {
-    class StatusBar : MonoBehaviour
+    class StatusBar : MonoBehaviourPunCallbacks
     {
         [SerializeField]
         private ConnectionModel _connectionModel;
@@ -17,6 +17,11 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
         {
             _connectionModel.ConnectionError += OnError;
             _textDisplay = GetComponent<TextMeshProUGUI>();
+        }
+
+        private void OnError(string obj)
+        {
+            _textDisplay.text = "State: Error" + obj;
         }
 
         private void Update()

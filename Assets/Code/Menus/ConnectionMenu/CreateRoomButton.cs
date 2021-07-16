@@ -19,6 +19,12 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
             if (!PhotonNetwork.IsConnected)
                 return;
 
+            if (connectionModel.GetAllRooms().Count > 1)
+            {
+                Debug.Log("youve already got a room fool, don't get greedy");
+                return;
+            }
+
             connectionModel.CreateRoom(_roomNameInput.text);            
         }
     }
