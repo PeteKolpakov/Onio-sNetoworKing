@@ -16,6 +16,7 @@ namespace OniosNetworKing.Assets.Code.ConnectionMenu
         private GameObject _roomListingPrefab;
         [SerializeField]
         private Transform _content;
+        private string _spawnedRoomName;
 
         public override void OnRoomListUpdate(List<RoomInfo> roomList)
         {
@@ -24,6 +25,17 @@ namespace OniosNetworKing.Assets.Code.ConnectionMenu
                 RoomListing listing = Instantiate(_roomListingPrefab, _content).GetComponent<RoomListing>();
                 listing.SetText(room);
             }
+        }
+
+        public void SpawnListingForMaster(string roomName)
+        {
+            if (_spawnedRoomName == roomName)
+            {
+                return;
+            }
+            _spawnedRoomName = roomName;
+            RoomListing listing = Instantiate(_roomListingPrefab, _content).GetComponent<RoomListing>();
+            listing.SetText(roomName);
         }
     }
 }

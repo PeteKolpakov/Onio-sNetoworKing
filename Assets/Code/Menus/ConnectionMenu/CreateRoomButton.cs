@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Photon.Pun;
+using OniosNetworKing.Assets.Code.ConnectionMenu;
 
 namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
 {
@@ -15,6 +16,8 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
         private ConnectionModel _connectionModel;
         [SerializeField]
         private StatusBar _statusDisplay;
+        [SerializeField]
+        private RoomListDisplay _roomDisplay;
 
         public void CreateRoomWithNameFromInput()  
         {
@@ -27,7 +30,8 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
                 return;
             }
 
-            _connectionModel.CreateRoom(_roomNameInput.text);
+            _connectionModel.CreateRoom(_roomNameInput.text);            
+            _roomDisplay.SpawnListingForMaster(_roomNameInput.text);            
             _statusDisplay.WriteToStatusBar($"Room Created With Name {_roomNameInput.text}");
         }
     }

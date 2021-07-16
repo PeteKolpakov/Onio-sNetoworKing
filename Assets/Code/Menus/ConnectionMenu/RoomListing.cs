@@ -15,5 +15,9 @@ namespace OniosNetworKing.Assets.Code.Menus.ConnectionMenu
         {
             _text.text = roomInfo.Name + ": Players" + roomInfo.PlayerCount;
         }
+        public void SetText(string roomInfo)
+        {
+            _text.text = roomInfo;
+        }
     }
 }
