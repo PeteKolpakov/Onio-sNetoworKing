@@ -49,6 +49,10 @@ namespace Assets.Code
         }
         private void FixedUpdate()
         {
+            if (OniosNetworKing.ChatManager.IsChatting)
+            {
+                return;
+            }
             _rb.velocity = _direction * _speed;
         }
 

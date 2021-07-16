@@ -10,7 +10,7 @@ namespace OniosNetworKing
 {
     public class ChatManager : MonoBehaviourPun, IPunObservable
     {
-        public bool IsChatting = false;
+        public static bool IsChatting = false;
 
         private bool _changedColor = false;
 
